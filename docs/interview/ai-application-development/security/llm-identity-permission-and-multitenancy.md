@@ -4,8 +4,8 @@
 
 - 本次主题：LLM 应用中的身份识别、权限控制与多租户数据隔离。
 - 所属分类：AI 应用开发 / Security
-- 已回顾历史主题：RAG 系统设计、Embedding 与向量索引、GraphRAG、Agent 工具调用、Agent 规划执行、Prompt 工程、结构化输出、MCP 集成、多模态、LLM 微调、上下文记忆、流式异步、测试 Mock、模型网关、成本缓存限流、发布配置治理、评估观测、坏 Case 归因、安全防护。
-- 不重复原因：已有安全主题聚焦提示注入、越权访问和敏感数据泄露的通用防线；本文专门展开“身份上下文如何贯穿 LLM 调用链，以及租户、角色、数据权限如何落到检索层、工具层和审计层”。
+- 已回顾历史主题：RAG 系统设计、Embedding 与向量索引、GraphRAG、Agent 工具调用、Agent 规划执行、Prompt 工程、结构化输出、MCP 集成、多模态、LLM 微调、上下文记忆、Text-to-SQL / NL2SQL、流式异步、测试 Mock、LLM 工作流编排与 Human-in-the-loop、模型网关、成本缓存限流、发布配置治理、评估观测、坏 Case 归因、安全防护。
+- 不重复原因：已有安全主题聚焦提示注入、越权访问和敏感数据泄露的通用防线；Text-to-SQL 主题重点在 SQL 生成、校验和查询执行；Workflow 主题重点在流程编排、人工介入和状态治理。本文专门展开“身份上下文如何贯穿 LLM 调用链，以及租户、角色、数据权限如何落到检索层、工具层和审计层”。
 - 适用岗位：AI 应用工程师、LLM 平台工程师、RAG/Agent 工程师、后端架构师、AI 安全工程师。
 
 ## 一、为什么这是高频考点
@@ -90,10 +90,11 @@ RAG 权限设计至少要覆盖三个阶段：
   "chunk_id": "doc_9527_chunk_03",
   "tenant_id": "tenant_a",
   "doc_id": "policy_2026",
+  "allowed_scopes": ["knowledge:hr:read", "knowledge:finance:read"],
   "allowed_roles": ["hr_admin", "manager"],
   "allowed_user_ids": ["u_1001"],
   "department_ids": ["hr", "finance"],
-  "sensitivity": "internal"
+  "sensitivity_level": 2
 }
 ```
 
@@ -152,9 +153,11 @@ tenant_policy:
 rag_policy:
   required_metadata:
     - tenant_id
-    - document_acl
-    - sensitivity
-  retrieval_filter: "tenant_id == current.tenant_id AND acl intersects current.scopes"
+    - allowed_scopes
+    - allowed_roles
+    - allowed_user_ids
+    - sensitivity_level
+  retrieval_filter: "tenant_id == current.tenant_id AND allowed_scopes intersects current.scopes"
 
 tool_policy:
   refund_order:
@@ -183,7 +186,7 @@ def build_rag_context(query: str, identity: IdentityContext) -> list[Chunk]:
         namespace=identity.tenant_id,
         filter={
             "doc_id": {"$in": allowed_doc_ids},
-            "sensitivity": {"$lte": identity.max_sensitivity},
+            "sensitivity_level": {"$in": identity.allowed_sensitivity_levels},
         },
         top_k=8,
     )
