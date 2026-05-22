@@ -526,4 +526,3 @@ async def handle_event(event, state):
 - 写操作必须复述确认，ASR 错误不能直接触发高风险工具。
 - WebRTC 适合强实时音频，WebSocket 适合轻量实现。
 - 线上排障要有事件日志、音频回放、turn_id、播放进度和分段延迟。
-
