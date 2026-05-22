@@ -13,6 +13,7 @@
 | 模型适配与微调 | `fine-tuning/` | [LLM 微调与 PEFT 落地](docs/interview/ai-application-development/fine-tuning/llm-fine-tuning-and-peft.md) |
 | 多模态 | `multimodal/` | [多模态 LLM 图像与文档理解](docs/interview/ai-application-development/multimodal/multimodal-llm-vision-document-understanding.md) |
 | MCP | `mcp/` | [MCP 服务端与客户端集成](docs/interview/ai-application-development/mcp/model-context-protocol-server-and-client-integration.md) |
+| 推理服务 | `inference/` | [LLM 推理服务化与性能优化](docs/interview/ai-application-development/inference/llm-inference-serving-and-optimization.md) |
 | 运行时架构 | `runtime/` | [流式响应与异步任务架构](docs/interview/ai-application-development/runtime/llm-streaming-and-async-architecture.md) |
 | Workflow | `workflow/` | [LLM 工作流编排与 Human-in-the-loop](docs/interview/ai-application-development/workflow/llm-workflow-orchestration-and-human-in-the-loop.md) |
 | 生产化 | `production/` | [成本、缓存与限流设计](docs/interview/ai-application-development/production/llm-cost-cache-rate-limit.md)、[模型网关与多模型路由](docs/interview/ai-application-development/production/llm-model-gateway-and-routing.md) |
@@ -26,6 +27,7 @@ docs/interview/ai-application-development/
 ├── agents/
 ├── context-engineering/
 ├── fine-tuning/
+├── inference/
 ├── llmops/
 ├── mcp/
 ├── multimodal/
