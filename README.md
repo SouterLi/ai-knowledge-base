@@ -10,6 +10,7 @@
 | RAG | `rag/` | [系统设计与评估](docs/interview/ai-application-development/rag/rag-system-design-and-evaluation.md) |
 | 上下文工程 | `context-engineering/` | [上下文与记忆设计](docs/interview/ai-application-development/context-engineering/llm-context-memory-design.md) |
 | Prompt 工程 | `prompt-engineering/` | [Prompt 工程与结构化输出](docs/interview/ai-application-development/prompt-engineering/prompt-engineering-and-structured-output.md) |
+| 模型适配与微调 | `fine-tuning/` | [LLM 微调与 PEFT 落地](docs/interview/ai-application-development/fine-tuning/llm-fine-tuning-and-peft.md) |
 | 多模态 | `multimodal/` | [多模态 LLM 图像与文档理解](docs/interview/ai-application-development/multimodal/multimodal-llm-vision-document-understanding.md) |
 | 运行时架构 | `runtime/` | [流式响应与异步任务架构](docs/interview/ai-application-development/runtime/llm-streaming-and-async-architecture.md) |
 | Workflow | `workflow/` | [LLM 工作流编排与 Human-in-the-loop](docs/interview/ai-application-development/workflow/llm-workflow-orchestration-and-human-in-the-loop.md) |
@@ -23,6 +24,7 @@
 docs/interview/ai-application-development/
 ├── agents/
 ├── context-engineering/
+├── fine-tuning/
 ├── llmops/
 ├── multimodal/
 ├── production/
