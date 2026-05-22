@@ -7,7 +7,7 @@
 | 主题分类 | 路径 | 文档 |
 | --- | --- | --- |
 | Agent | `agents/` | [工具调用与函数调用设计](docs/interview/ai-application-development/agents/agent-tool-calling-and-function-design.md)、[规划执行与可靠性治理](docs/interview/ai-application-development/agents/ai-agent-planning-execution-and-reliability.md) |
-| RAG | `rag/` | [系统设计与评估](docs/interview/ai-application-development/rag/rag-system-design-and-evaluation.md) |
+| RAG | `rag/` | [系统设计与评估](docs/interview/ai-application-development/rag/rag-system-design-and-evaluation.md)、[Embedding 与向量索引工程](docs/interview/ai-application-development/rag/embedding-vector-index-engineering.md) |
 | 上下文工程 | `context-engineering/` | [上下文与记忆设计](docs/interview/ai-application-development/context-engineering/llm-context-memory-design.md) |
 | Prompt 工程 | `prompt-engineering/` | [Prompt 工程与结构化输出](docs/interview/ai-application-development/prompt-engineering/prompt-engineering-and-structured-output.md) |
 | 模型适配与微调 | `fine-tuning/` | [LLM 微调与 PEFT 落地](docs/interview/ai-application-development/fine-tuning/llm-fine-tuning-and-peft.md) |
