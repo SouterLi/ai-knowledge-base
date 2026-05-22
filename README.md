@@ -12,7 +12,7 @@
 | Prompt 工程 | `prompt-engineering/` | [Prompt 工程与结构化输出](docs/interview/ai-application-development/prompt-engineering/prompt-engineering-and-structured-output.md) |
 | 多模态 | `multimodal/` | [多模态 LLM 图像与文档理解](docs/interview/ai-application-development/multimodal/multimodal-llm-vision-document-understanding.md) |
 | 运行时架构 | `runtime/` | [流式响应与异步任务架构](docs/interview/ai-application-development/runtime/llm-streaming-and-async-architecture.md) |
-| 生产化 | `production/` | [成本、缓存与限流设计](docs/interview/ai-application-development/production/llm-cost-cache-rate-limit.md) |
+| 生产化 | `production/` | [成本、缓存与限流设计](docs/interview/ai-application-development/production/llm-cost-cache-rate-limit.md)、[模型网关与多模型路由](docs/interview/ai-application-development/production/llm-model-gateway-and-routing.md) |
 | LLMOps | `llmops/` | [评估与可观测性](docs/interview/ai-application-development/llmops/llm-application-evaluation-observability.md) |
 | 安全 | `security/` | [应用安全防护](docs/interview/ai-application-development/security/llm-application-security.md) |
 
