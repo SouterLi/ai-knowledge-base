@@ -19,7 +19,7 @@
 | Workflow | `workflow/` | [LLM 工作流编排与 Human-in-the-loop](docs/interview/ai-application-development/workflow/llm-workflow-orchestration-and-human-in-the-loop.md) |
 | 生产化 | `production/` | [成本、缓存与限流设计](docs/interview/ai-application-development/production/llm-cost-cache-rate-limit.md)、[模型网关与多模型路由](docs/interview/ai-application-development/production/llm-model-gateway-and-routing.md)、[发布、配置与实验治理](docs/interview/ai-application-development/production/llm-release-config-and-experiment-governance.md) |
 | LLMOps | `llmops/` | [评估与可观测性](docs/interview/ai-application-development/llmops/llm-application-evaluation-observability.md)、[数据闭环与坏 Case 归因](docs/interview/ai-application-development/llmops/llm-feedback-data-flywheel-and-badcase-analysis.md) |
-| 安全 | `security/` | [应用安全防护](docs/interview/ai-application-development/security/llm-application-security.md) |
+| 安全 | `security/` | [应用安全防护](docs/interview/ai-application-development/security/llm-application-security.md)、[身份权限与多租户隔离](docs/interview/ai-application-development/security/llm-identity-permission-and-multitenancy.md) |
 
 ## 文件树
 
