@@ -102,19 +102,19 @@ Reranker 输入通常是：
 
 向量检索 top_k 的问题：
 
-1. **相似不等于可回答**  
+1. **相似不等于可回答**
    用户问“退款多久到账”，向量召回可能返回大量“退款申请条件”，但不包含到账时间。
 
-2. **局部语义容易误判**  
+2. **局部语义容易误判**
    chunk 中有几个关键词相同，但上下文对象不同，例如“企业版”和“个人版”规则不同。
 
-3. **多路召回会产生重复**  
+3. **多路召回会产生重复**
    BM25、向量、多查询召回可能返回同一段或相邻段。
 
-4. **排序目标不同**  
+4. **排序目标不同**
    ANN 检索优化的是向量距离，不一定优化最终回答质量。
 
-5. **上下文窗口有限**  
+5. **上下文窗口有限**
    即使模型支持长上下文，也不代表应该把噪声都塞进去。
 
 面试回答可以这样说：
@@ -403,18 +403,33 @@ def normalize(value: float, minimum: float, maximum: float) -> float:
 
 
 def compute_final_score(candidate: Candidate) -> float:
-    freshness_score = candidate.metadata.get("freshness_score", 0.0)
-    title_match_score = candidate.metadata.get("title_match_score", 0.0)
-    authority_score = candidate.metadata.get("authority_score", 0.0)
+    normalized_rerank_score = normalize(candidate.rerank_score, 0.0, 1.0)
+    normalized_vector_score = normalize(candidate.vector_score, 0.0, 1.0)
+    normalized_bm25_score = normalize(candidate.bm25_score, 0.0, 30.0)
+    normalized_freshness_score = normalize(
+        candidate.metadata.get("freshness_score", 0.0),
+        0.0,
+        1.0,
+    )
+    normalized_title_match_score = normalize(
+        candidate.metadata.get("title_match_score", 0.0),
+        0.0,
+        1.0,
+    )
+    normalized_authority_score = normalize(
+        candidate.metadata.get("authority_score", 0.0),
+        0.0,
+        1.0,
+    )
 
     # 权限不能靠打分处理，候选进入这里前必须已经完成 ACL 过滤
     return (
-        0.60 * candidate.rerank_score
-        + 0.15 * candidate.vector_score
-        + 0.10 * candidate.bm25_score
-        + 0.07 * title_match_score
-        + 0.05 * freshness_score
-        + 0.03 * authority_score
+        0.60 * normalized_rerank_score
+        + 0.15 * normalized_vector_score
+        + 0.10 * normalized_bm25_score
+        + 0.07 * normalized_title_match_score
+        + 0.05 * normalized_freshness_score
+        + 0.03 * normalized_authority_score
     )
 ```
 
@@ -677,22 +692,22 @@ MMR 解决 top_k 结果高度重复的问题。它在选择候选时同时考虑
 
 ## 九、常见误区
 
-1. **以为 top_k 越大越好**  
+1. **以为 top_k 越大越好**
    top_k 增大可能提高召回，但也会增加噪声、成本和延迟。
 
-2. **把长上下文当成排序替代品**  
+2. **把长上下文当成排序替代品**
    长上下文能装更多内容，但不能判断哪些内容应该被信任。
 
-3. **把摘要当原文证据**  
+3. **把摘要当原文证据**
    摘要可以帮助压缩，但引用和审计应回到原文 span。
 
-4. **忽略分数尺度差异**  
+4. **忽略分数尺度差异**
    向量分、BM25 分、reranker 分不能直接相加，必须归一化或校准。
 
-5. **用降权代替权限过滤**  
+5. **用降权代替权限过滤**
    无权限内容不应该进入候选集，更不应该进入 prompt。
 
-6. **只优化生成模型，不看检索链路**  
+6. **只优化生成模型，不看检索链路**
    如果正确证据没进上下文，再强的模型也容易编。
 
 ---
