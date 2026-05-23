@@ -155,12 +155,12 @@ Cross-Encoder 会把 query 和 passage 作为一对输入：
 
 ```text
 final_score =
-  0.55 * reranker_score
+  0.55 * normalized_reranker_score
   + 0.20 * normalized_vector_score
-  + 0.10 * bm25_score
-  + 0.08 * title_match_score
-  + 0.05 * freshness_score
-  + 0.02 * authority_score
+  + 0.10 * normalized_bm25_score
+  + 0.08 * normalized_title_match_score
+  + 0.05 * normalized_freshness_score
+  + 0.02 * normalized_authority_score
 ```
 
 常见信号：
