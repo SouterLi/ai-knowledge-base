@@ -6,7 +6,7 @@
 
 | 主题分类 | 路径 | 文档 |
 | --- | --- | --- |
-| Agent | `agents/` | [工具调用与函数调用设计](docs/interview/ai-application-development/agents/agent-tool-calling-and-function-design.md)、[规划执行与可靠性治理](docs/interview/ai-application-development/agents/ai-agent-planning-execution-and-reliability.md) |
+| Agent | `agents/` | [工具调用与函数调用设计](docs/interview/ai-application-development/agents/agent-tool-calling-and-function-design.md)、[规划执行与可靠性治理](docs/interview/ai-application-development/agents/ai-agent-planning-execution-and-reliability.md)、[多 Agent 协作与编排设计](docs/interview/ai-application-development/agents/multi-agent-collaboration-and-orchestration.md) |
 | RAG | `rag/` | [系统设计与评估](docs/interview/ai-application-development/rag/rag-system-design-and-evaluation.md)、[Embedding 与向量索引工程](docs/interview/ai-application-development/rag/embedding-vector-index-engineering.md)、[GraphRAG 与知识图谱增强检索](docs/interview/ai-application-development/rag/graphrag-knowledge-graph-retrieval.md)、[文档摄取、切分与索引构建流水线](docs/interview/ai-application-development/rag/rag-document-ingestion-and-chunking.md)、[重排序与上下文压缩](docs/interview/ai-application-development/rag/rag-reranking-and-context-compression.md) |
 | 上下文工程 | `context-engineering/` | [上下文与记忆设计](docs/interview/ai-application-development/context-engineering/llm-context-memory-design.md) |
 | 数据查询 | `data-query/` | [Text-to-SQL / NL2SQL 应用开发](docs/interview/ai-application-development/data-query/text-to-sql-nl2sql-application-development.md) |
