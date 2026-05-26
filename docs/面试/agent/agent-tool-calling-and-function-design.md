@@ -396,5 +396,5 @@ def select_tools(intent: str) -> list:
 | --- | --- |
 | 工具协议、Function Calling、参数校验 | 本文 |
 | ReAct / Plan-and-Execute、可靠性、Multi-Agent | [规划执行与可靠性治理](./ai-agent-planning-execution-and-reliability.md) |
-| 上下文窗口与记忆 | [上下文与记忆设计](../上下文工程/llm-context-memory-design.md) |
+| 上下文窗口与记忆 | [上下文与记忆设计](../context-engineering/llm-context-memory-design.md) |
 | Prompt 与结构化输出 | [Prompt 工程与结构化输出](../提示词工程/prompt-engineering-and-structured-output.md) |
