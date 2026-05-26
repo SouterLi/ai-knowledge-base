@@ -17,7 +17,7 @@
 **怎么读**
 
 - **冲刺复习**：优先阅读 **第 1～12 篇**（覆盖绝大多数一面、二面高频点）  
-- **岗位定制**：知识库 / 问答岗建议 2、5～7、22；Agent 岗建议 3、8、13、16、21；平台 / 基建岗建议 10～12、14、17～20  
+- **岗位定制**：知识库 / 问答岗建议 2、5～7、22；Agent 岗建议 3、8、13、16、21；平台 / 基建岗建议 10～12、14、17～20、27
 - **专题深入**：同一主题多篇（如 RAG 共五篇）建议先读第 2 篇总览，再读第 5～7、22 篇  
 
 所有正文位于 `docs/interview/ai-application-development/`。
@@ -26,7 +26,7 @@
 
 ## 目录
 
-全书 **26 篇**，下表按 **面试常见程度、岗位通用性、知识依赖关系** 排序。序号越小，越建议优先阅读；「卷」仅作主题归类，**复习顺序以序号为准**。
+全书 **27 篇**，下表按 **面试常见程度、岗位通用性、知识依赖关系** 排序。序号越小，越建议优先阅读；「卷」仅作主题归类，**复习顺序以序号为准**。
 
 | 篇 | 卷 | 主题 | 篇章 |
 | ---: | --- | --- | --- |
@@ -56,6 +56,7 @@
 | 24 | 专项进阶 | LLM 微调与 PEFT 落地 | [阅读](docs/interview/ai-application-development/fine-tuning/llm-fine-tuning-and-peft.md) |
 | 25 | 专项进阶 | 多模态 LLM 图像与文档理解 | [阅读](docs/interview/ai-application-development/multimodal/multimodal-llm-vision-document-understanding.md) |
 | 26 | 专项进阶 | 实时语音 Agent 架构设计 | [阅读](docs/interview/ai-application-development/voice-agent/realtime-voice-agent-architecture.md) |
+| 27 | 生产化与 LLMOps | 开源大模型私有化部署与推理服务 | [阅读](docs/interview/ai-application-development/deployment/open-source-llm-private-deployment-and-inference-serving.md) |
 
 **卷次说明**
 
@@ -65,7 +66,7 @@
 | RAG 工程化 | 2、5～7、22 | 切分、索引、重排、图谱——知识库 / 问答岗深度考点 |
 | Agent 与编排 | 3、8、13、16、21 | 可靠性、工作流、MCP、多 Agent——Agent 方向核心 |
 | 安全与合规 | 9、18 | 提示注入、越权、多租户——企业落地必谈 |
-| 生产化与 LLMOps | 10、11、14、17、19、20 | 评估、成本、网关、测试、发布与数据闭环 |
+| 生产化与 LLMOps | 10、11、14、17、19、20、27 | 评估、成本、网关、测试、发布、数据闭环与私有化推理服务 |
 | 运行时与性能 | 12、23 | 流式、异步、延迟——体验与 SLA |
 | 数据与查询 | 15 | NL2SQL——数据分析 / 业务系统结合场景 |
 | 专项进阶 | 24～26 | 微调、多模态、语音——按岗位选读 |
