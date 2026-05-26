@@ -1,44 +1,46 @@
-# AI 应用开发面试主题：LLM 流式响应与异步任务架构
-
-## 主题选择记录
-
-- 已回顾主题：RAG、AI Agent、Prompt 结构化输出、评估与可观测性、安全防护、上下文工程与记忆设计。
-- 本次新主题：LLM 流式响应与异步任务架构。
-- 去重说明：本主题关注请求运行时、响应链路和长任务治理，不重复讨论检索、工具调用或提示词设计。
+# LLM 流式响应与异步任务架构
 
 ## 核心概念
 
-LLM 应用常见两类响应模式：
+### 1. 两种响应模式
 
-1. **同步一次性返回**：后端等待模型完整生成后再返回。实现简单，但用户等待时间长，超时风险高。
-2. **流式响应**：模型边生成边返回 token 或文本片段。常用 SSE、WebSocket 或 HTTP chunked transfer，能显著改善首字延迟和交互体验。
+| 模式 | 特点 | 适用 |
+| --- | --- | --- |
+| 同步一次性返回 | 实现简单，等待完整生成 | 短问答、低延迟要求不高 |
+| 流式响应 | 边生成边返回，改善 TTFT | 在线聊天、写作助手 |
 
-面试中要区分三个指标：
+长任务（报告生成、批量分析、长文档总结）应使用**异步任务**：API 创建任务，Worker 执行，前端轮询/SSE/WebSocket 看进度。
 
-- **TTFT**：Time To First Token，首个 token 返回时间，决定用户是否觉得系统“有反应”。
-- **端到端延迟**：从请求发出到完整答案结束的时间。
-- **吞吐与并发**：同一时间能稳定服务多少请求，受模型限流、连接数、队列和后端资源影响。
+### 2. 关键指标
 
-对于报告生成、批量分析、代码扫描、长文档总结等任务，流式输出仍可能不够，应改为**异步任务架构**：请求只创建任务，后台 Worker 执行，前端轮询或订阅进度。
+- **TTFT**：首 token 时间，决定“是否有反应”。
+- **端到端延迟**：完整答案结束时间。
+- **吞吐与并发**：受模型限流、连接数、队列影响。
 
-## 关键步骤
+### 3. 通信协议选型
 
-### 1. 选择通信协议
+| 协议 | 特点 | 场景 |
+| --- | --- | --- |
+| SSE | 单向推送，浏览器友好 | 聊天流式 |
+| WebSocket | 双向 | 语音、协作、中途控制 |
+| 轮询 | 简单稳定 | 长任务状态 |
 
-- **SSE**：单向服务端推送，适合聊天流式输出，浏览器支持好，实现成本低。
-- **WebSocket**：双向通信，适合协作编辑、语音对话、需要客户端中途发送控制消息的场景。
-- **轮询任务状态**：适合长任务、离线任务和可恢复任务，链路稳定，便于重试。
+生产环境**不让前端直连模型 API**——后端负责鉴权、限流、Prompt、过滤、日志与成本。
 
-### 2. 设计流式输出协议
+---
 
-不要只推纯文本，建议使用事件类型：
+## 核心知识点
 
-- `delta`：新增文本片段。
-- `metadata`：模型、引用、用量、任务 ID。
-- `error`：可展示错误。
-- `done`：生成结束。
+### 1. 结构化流式协议
 
-这样前端可以明确区分内容、状态和错误，后端也便于做审计。
+用事件类型区分内容与状态，勿只推纯文本：
+
+| 事件 | 含义 |
+| --- | --- |
+| `delta` | 新增文本片段 |
+| `metadata` | 模型、引用、用量、task_id |
+| `error` | 可展示错误 |
+| `done` | 生成结束 |
 
 ```python
 from fastapi import FastAPI
@@ -47,55 +49,118 @@ from fastapi.responses import StreamingResponse
 app = FastAPI()
 
 async def stream_answer():
-    for chunk in ["正在分析问题...", "核心结论是...", "完成"]:
-        # SSE 每条消息用 data 开头，并用空行分隔
-        yield f"event: delta\ndata: {chunk}\n\n"
-    yield "event: done\ndata: {}\n\n"
+  for chunk in ["正在分析...", "核心结论是...", "完成"]:
+    # 中文注释：SSE 用 event + data，空行分隔
+    yield f"event: delta\ndata: {chunk}\n\n"
+  yield "event: done\ndata: {}\n\n"
 
 @app.get("/chat/stream")
 def chat_stream():
-    return StreamingResponse(stream_answer(), media_type="text/event-stream")
+  return StreamingResponse(stream_answer(), media_type="text/event-stream")
 ```
 
-### 3. 长任务改为异步
+### 2. 后端中转职责
 
-推荐链路：
+鉴权 → 限流 → Prompt 组装 → 调用上游 → 敏感过滤 → 结构化事件 → 审计/计费。  
+网关/Nginx **禁止缓冲** `text/event-stream`。
 
-1. API 接收请求，校验权限和参数。
-2. 写入任务表，状态为 `pending`。
-3. 投递队列消息，例如 Redis Queue、Celery、Kafka 或云队列。
-4. Worker 执行任务，持续更新 `running/progress/succeeded/failed`。
-5. 前端通过轮询、SSE 或 WebSocket 获取进度和结果。
+### 3. 用户取消
 
-关键字段包括：`task_id`、`user_id`、`status`、`progress`、`result_url`、`error_code`、`created_at`、`updated_at`。
+前端断连 ≠ 上游停止。后端需：
 
-## 常见问题
+- 监听客户端断开，**取消上游请求**；
+- 释放连接，标记 `cancelled`；
+- 异步 Worker 在安全检查点读取消标记并退出。
 
-### 1. 流式响应为什么还需要后端中转？
+```python
+async def proxy_stream(upstream, disconnect_event):
+  async for chunk in upstream:
+    if disconnect_event.is_set():
+      await upstream.aclose()  # 中文注释：断连后停止消耗 token
+      break
+    yield chunk
+```
 
-生产系统不能让前端直接调用模型 API。后端需要负责鉴权、限流、Prompt 组装、敏感信息过滤、日志、成本统计和错误转换。
+### 4. 部分输出后失败
 
-### 2. 用户中途取消怎么办？
+发送 `error` 事件，前端提示“结果不完整”；关键业务**先草稿后提交**，不边流边落库最终结果。
 
-前端关闭连接不等于模型调用自动停止。后端要监听断连信号，取消上游请求，释放连接，并把任务标记为 `cancelled`。异步任务还要支持取消标记，Worker 在安全检查点退出。
+### 5. 异步任务架构
 
-### 3. 如何处理部分输出后的失败？
+```text
+API 校验 → 写任务表(pending) → 投递队列 → Worker 执行
+       → 更新 running/progress/succeeded/failed
+       → 前端轮询/SSE/WebSocket 获取进度
+```
 
-流式响应可能已经展示一半内容后失败。协议中应发送 `error` 事件，并让前端提示“结果不完整”。对关键业务不要边生成边落库最终结果，应先写草稿或临时结果，完成后再提交。
+任务字段：`task_id`、`user_id`、`status`、`progress`、`result_url`、`error_code`、时间戳。
 
-### 4. 如何避免重复执行？
+```python
+def create_task(payload: dict, idempotency_key: str) -> str:
+  existing = task_repo.find_by_key(idempotency_key)
+  if existing:
+    return existing.task_id  # 中文注释：重试返回同一任务，避免重复执行
+  task_id = task_repo.insert(status="pending", payload=payload)
+  queue.publish(task_id)
+  return task_id
+```
 
-创建任务和写操作要支持幂等键。客户端重试时带上同一个 `idempotency_key`，后端返回已有任务，而不是新建重复任务。
+### 6. 幂等与重试
 
-## 实践建议
+创建任务与写操作带 `idempotency_key`；Worker 重试需识别已完成步骤；失败任务支持**安全重放**或人工介入。
 
-- 聊天问答优先 SSE；需要双向实时控制再选 WebSocket。
-- 超过接口超时时间、依赖多个外部系统或结果需要下载的任务，优先异步化。
-- 流式协议要结构化，不要把错误和正文混在同一个字符串里。
-- 对模型调用设置超时、最大 token、最大并发和取消机制。
-- 记录 TTFT、总耗时、失败率、取消率、平均 token、队列等待时间。
-- 面试回答架构题时，按“入口 API、队列、Worker、状态存储、进度通知、失败重试、幂等与观测”展开。
+### 7. 观测指标
 
-## 一句话总结
+TTFT、总耗时、失败率、取消率、平均 token、队列等待时间、chunk 间隔 P95。
 
-LLM 运行时设计的核心不是简单把模型输出转发给用户，而是围绕首字延迟、长任务可靠性、取消重试、幂等控制和可观测性，构建稳定可恢复的应用链路。
+### 8. 何时异步化
+
+超过 HTTP 超时、依赖多外部系统、结果需下载、批量处理——返回 `task_id` + 进度，而非长时间挂连接。
+
+---
+
+## 高频面试问题与标准答案
+
+**Q1：流式为什么需要后端中转？**
+
+统一鉴权、限流、Prompt、敏感过滤、日志与成本；隐藏 API Key；转换供应商差异的 chunk 格式。
+
+**Q2：用户中途取消怎么办？**
+
+监听断连 → 取消上游 → 标记 cancelled；异步任务 Worker 轮询取消标记；记录取消率分析体验问题。
+
+**Q3：流式中途失败如何处理？**
+
+协议发 `error`；UI 标明不完整；关键写操作未完成前不提交；可保留已生成草稿供用户决定。
+
+**Q4：如何避免重复执行？**
+
+`idempotency_key` 创建任务；写工具幂等键；队列消费至少一次时用状态机防重。
+
+**Q5：SSE 和 WebSocket 怎么选？**
+
+聊天单向输出优先 SSE；需客户端中途发控制（打断、切换模式、语音）用 WebSocket。
+
+**Q6：流式能降低模型推理时间吗？**
+
+不能减少完整 decode 时间，主要降低 TTFT 和感知延迟；完整耗时仍受输出 token 影响。
+
+**Q7：结构化 JSON 如何流式？**
+
+边流边解析或等 `done` 再校验；半截 JSON 不可直接进下游；或先流自然语言再单独结构化步骤。
+
+**Q8：长任务架构怎么答？**
+
+入口 API、队列、Worker、状态存储、进度通知、失败重试、幂等、观测——按此展开。
+
+---
+
+## 面试回答加分点
+
+1. 区分**同步/流式/异步**三种模式及选型依据（超时、依赖数、交互需求）。
+2. 强调**结构化事件协议**，而非 raw text pipe。
+3. 取消链路：**客户端 → 网关 → 应用 → 上游模型** 全链路传递。
+4. 高风险业务：**展示 ≠ 执行完成**（工具/写库须等真实结果）。
+5. 异步任务提**幂等键 + 状态机**，体现可靠性工程。
+6. 观测同时看 TTFT 与**队列等待**，定位是模型慢还是排队慢。
+7. 架构题按“入口、队列、Worker、存储、通知、幂等、观测”七段回答，条理清晰。
