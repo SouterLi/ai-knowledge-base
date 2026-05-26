@@ -30,33 +30,33 @@
 
 | 篇 | 卷 | 主题 | 篇章 |
 | ---: | --- | --- | --- |
-| 1 | 基础能力 | Prompt 工程与结构化输出 | [阅读](docs/面试/提示词工程/prompt-engineering-and-structured-output.md) |
-| 2 | 基础能力 | RAG 系统设计与评估（总览） | [阅读](docs/面试/rag/rag-system-design-and-evaluation.md) |
-| 3 | 基础能力 | AI Agent 工具调用与 Function Calling 设计 | [阅读](docs/面试/agent/agent-tool-calling-and-function-design.md) |
-| 4 | 基础能力 | LLM 上下文工程与记忆设计 | [阅读](docs/面试/context-engineering/llm-context-memory-design.md) |
-| 5 | RAG 工程化 | 文档摄取、切分与索引构建流水线 | [阅读](docs/面试/rag/rag-document-ingestion-and-chunking.md) |
-| 6 | RAG 工程化 | Embedding 与向量索引工程 | [阅读](docs/面试/rag/embedding-vector-index-engineering.md) |
-| 7 | RAG 工程化 | 重排序与上下文压缩 | [阅读](docs/面试/rag/rag-reranking-and-context-compression.md) |
-| 8 | Agent 与编排 | AI Agent 规划执行与可靠性治理 | [阅读](docs/面试/agent/ai-agent-planning-execution-and-reliability.md) |
-| 9 | 安全与合规 | LLM 应用安全防护 | [阅读](docs/面试/安全/llm-application-security.md) |
-| 10 | 生产化与 LLMOps | LLM 应用评估与可观测性 | [阅读](docs/面试/大模型运维/llm-application-evaluation-observability.md) |
-| 11 | 生产化与 LLMOps | LLM 应用成本、缓存与限流设计 | [阅读](docs/面试/生产化/llm-cost-cache-rate-limit.md) |
-| 12 | 运行时与性能 | LLM 流式响应与异步任务架构 | [阅读](docs/面试/运行时/llm-streaming-and-async-architecture.md) |
-| 13 | Agent 与编排 | LLM 工作流编排与 Human-in-the-loop | [阅读](docs/面试/工作流/llm-workflow-orchestration-and-human-in-the-loop.md) |
-| 14 | 生产化与 LLMOps | 模型网关与多模型路由 | [阅读](docs/面试/生产化/llm-model-gateway-and-routing.md) |
-| 15 | 数据与查询 | Text-to-SQL / NL2SQL 应用开发 | [阅读](docs/面试/数据查询/text-to-sql-nl2sql-application-development.md) |
-| 16 | Agent 与编排 | MCP 服务端与客户端集成 | [阅读](docs/面试/模型上下文协议/model-context-protocol-server-and-client-integration.md) |
-| 17 | 生产化与 LLMOps | LLM 应用测试与 Mock 策略 | [阅读](docs/面试/测试/llm-application-testing-and-mocking.md) |
-| 18 | 安全与合规 | 身份权限与多租户隔离 | [阅读](docs/面试/安全/llm-identity-permission-and-multitenancy.md) |
-| 19 | 生产化与 LLMOps | 发布、配置与实验治理 | [阅读](docs/面试/生产化/llm-release-config-and-experiment-governance.md) |
-| 20 | 生产化与 LLMOps | 数据闭环与坏 Case 归因 | [阅读](docs/面试/大模型运维/llm-feedback-data-flywheel-and-badcase-analysis.md) |
-| 21 | Agent 与编排 | 多 Agent 协作与编排设计 | [阅读](docs/面试/agent/multi-agent-collaboration-and-orchestration.md) |
-| 22 | RAG 工程化 | GraphRAG 与知识图谱增强检索 | [阅读](docs/面试/rag/graphrag-knowledge-graph-retrieval.md) |
-| 23 | 运行时与性能 | LLM 应用性能与端到端延迟优化 | [阅读](docs/面试/性能优化/llm-application-latency-optimization.md) |
-| 24 | 专项进阶 | LLM 微调与 PEFT 落地 | [阅读](docs/面试/微调/llm-fine-tuning-and-peft.md) |
-| 25 | 专项进阶 | 多模态 LLM 图像与文档理解 | [阅读](docs/面试/多模态/multimodal-llm-vision-document-understanding.md) |
-| 26 | 专项进阶 | 实时语音 Agent 架构设计 | [阅读](docs/面试/语音代理/realtime-voice-agent-architecture.md) |
-| 27 | 生产化与 LLMOps | 开源大模型私有化部署与推理服务 | [阅读](docs/面试/部署/open-source-llm-private-deployment-and-inference-serving.md) |
+| 1 | 基础能力 | Prompt 工程与结构化输出 | [阅读](docs/知识库/提示词工程/prompt-engineering-and-structured-output.md) |
+| 2 | 基础能力 | RAG 系统设计与评估（总览） | [阅读](docs/知识库/rag/rag-system-design-and-evaluation.md) |
+| 3 | 基础能力 | AI Agent 工具调用与 Function Calling 设计 | [阅读](docs/知识库/agent/agent-tool-calling-and-function-design.md) |
+| 4 | 基础能力 | LLM 上下文工程与记忆设计 | [阅读](docs/知识库/context-engineering/llm-context-memory-design.md) |
+| 5 | RAG 工程化 | 文档摄取、切分与索引构建流水线 | [阅读](docs/知识库/rag/rag-document-ingestion-and-chunking.md) |
+| 6 | RAG 工程化 | Embedding 与向量索引工程 | [阅读](docs/知识库/rag/embedding-vector-index-engineering.md) |
+| 7 | RAG 工程化 | 重排序与上下文压缩 | [阅读](docs/知识库/rag/rag-reranking-and-context-compression.md) |
+| 8 | Agent 与编排 | AI Agent 规划执行与可靠性治理 | [阅读](docs/知识库/agent/ai-agent-planning-execution-and-reliability.md) |
+| 9 | 安全与合规 | LLM 应用安全防护 | [阅读](docs/知识库/安全/llm-application-security.md) |
+| 10 | 生产化与 LLMOps | LLM 应用评估与可观测性 | [阅读](docs/知识库/大模型运维/llm-application-evaluation-observability.md) |
+| 11 | 生产化与 LLMOps | LLM 应用成本、缓存与限流设计 | [阅读](docs/知识库/生产化/llm-cost-cache-rate-limit.md) |
+| 12 | 运行时与性能 | LLM 流式响应与异步任务架构 | [阅读](docs/知识库/运行时/llm-streaming-and-async-architecture.md) |
+| 13 | Agent 与编排 | LLM 工作流编排与 Human-in-the-loop | [阅读](docs/知识库/工作流/llm-workflow-orchestration-and-human-in-the-loop.md) |
+| 14 | 生产化与 LLMOps | 模型网关与多模型路由 | [阅读](docs/知识库/生产化/llm-model-gateway-and-routing.md) |
+| 15 | 数据与查询 | Text-to-SQL / NL2SQL 应用开发 | [阅读](docs/知识库/数据查询/text-to-sql-nl2sql-application-development.md) |
+| 16 | Agent 与编排 | MCP 服务端与客户端集成 | [阅读](docs/知识库/模型上下文协议/model-context-protocol-server-and-client-integration.md) |
+| 17 | 生产化与 LLMOps | LLM 应用测试与 Mock 策略 | [阅读](docs/知识库/测试/llm-application-testing-and-mocking.md) |
+| 18 | 安全与合规 | 身份权限与多租户隔离 | [阅读](docs/知识库/安全/llm-identity-permission-and-multitenancy.md) |
+| 19 | 生产化与 LLMOps | 发布、配置与实验治理 | [阅读](docs/知识库/生产化/llm-release-config-and-experiment-governance.md) |
+| 20 | 生产化与 LLMOps | 数据闭环与坏 Case 归因 | [阅读](docs/知识库/大模型运维/llm-feedback-data-flywheel-and-badcase-analysis.md) |
+| 21 | Agent 与编排 | 多 Agent 协作与编排设计 | [阅读](docs/知识库/agent/multi-agent-collaboration-and-orchestration.md) |
+| 22 | RAG 工程化 | GraphRAG 与知识图谱增强检索 | [阅读](docs/知识库/rag/graphrag-knowledge-graph-retrieval.md) |
+| 23 | 运行时与性能 | LLM 应用性能与端到端延迟优化 | [阅读](docs/知识库/性能优化/llm-application-latency-optimization.md) |
+| 24 | 专项进阶 | LLM 微调与 PEFT 落地 | [阅读](docs/知识库/微调/llm-fine-tuning-and-peft.md) |
+| 25 | 专项进阶 | 多模态 LLM 图像与文档理解 | [阅读](docs/知识库/多模态/multimodal-llm-vision-document-understanding.md) |
+| 26 | 专项进阶 | 实时语音 Agent 架构设计 | [阅读](docs/知识库/语音代理/realtime-voice-agent-architecture.md) |
+| 27 | 生产化与 LLMOps | 开源大模型私有化部署与推理服务 | [阅读](docs/知识库/部署/open-source-llm-private-deployment-and-inference-serving.md) |
 
 **卷次说明**
 
