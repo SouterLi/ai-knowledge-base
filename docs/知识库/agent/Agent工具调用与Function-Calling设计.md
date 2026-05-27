@@ -371,4 +371,4 @@ Function Calling 的核心不是「让模型会调 API」，而是把输出约�
 3. **Workflow 对比**：固定链路编排，LLM 只做意图与参数判断。
 4. **ToolRegistry + strict schema**：屏蔽厂商差异，处理 streaming 半截 JSON。
 5. **一分钟口述**：契约化 → 应用层鉴权执行 → 动态工具子集 → 错误可恢复 → preview+confirm → 评工具选择与参数准确率。
-6. **延伸阅读**：同目录规划/多 Agent；`context-engineering`；MCP 文档。
+6. **延伸阅读**：同目录规划/多 Agent；`上下文工程`；MCP 文档。
