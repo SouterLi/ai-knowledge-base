@@ -1,0 +1,224 @@
+{
+  "main": {
+    "id": "77427424c69be4a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "4e5be30d36fb80a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "54176a77b7f02a1e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4077b530d78f1f39",
+    "type": "split",
+    "children": [
+      {
+        "id": "853d4521426d6e59",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fc91a214574761df",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "1b93d85f1e8caa31",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "b8dd8f56728d61fe",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "acc9bbc469fbcab7",
+    "type": "split",
+    "children": [
+      {
+        "id": "01f221334a3bd5c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "760d3ed5a05d9ccc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/面试问题/1.检索增强生成/RAG - 2.方案设计.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "RAG - 2.方案设计 的反向链接列表"
+            }
+          },
+          {
+            "id": "2c49e02ee6205657",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/面试问题/1.检索增强生成/RAG - 2.方案设计.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "RAG - 2.方案设计 的出链列表"
+            }
+          },
+          {
+            "id": "25a1f9de9496e385",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "7cc2476db3de933b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "978ccd72ea7fb3bd",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/面试问题/1.检索增强生成/RAG - 2.方案设计.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "RAG - 2.方案设计 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "54176a77b7f02a1e",
+  "lastOpenFiles": [
+    "docs/知识库/agent/Agent规划执行与可靠性治理.md",
+    "agent_planning_reliability.docx",
+    "README.md",
+    "docs/知识库/rag/RAG重排序与上下文压缩.md",
+    "docs/知识库/agent/Agent规划执行与可靠性治理.md~",
+    "README.md~",
+    "docs/知识库/生产化/LLM应用结果一致性与确定性治理.md",
+    "docs/知识库/文档智能/复杂表格文档解析与结构化抽取.md",
+    "docs/知识库/文档智能",
+    "docs/知识库/语音代理/实时语音Agent架构设计.md",
+    "docs/知识库/语音代理",
+    "docs/知识库/rag/RAG系统设计与评估.md",
+    "docs/知识库/rag/RAG文档摄取切分与索引构建.md",
+    "docs/知识库/rag/RAG答案生成引用归因与幻觉控制.md",
+    "docs/知识库/rag/RAG查询理解与路由检索.md",
+    "docs/知识库/rag/GraphRAG与知识图谱增强检索.md",
+    "docs/知识库/rag/Embedding与向量索引工程.md",
+    "docs/面试问题/1.RAG/RAG - 8.Graph RAG.md",
+    "docs/面试问题/1.RAG/RAG - 1.整体方案.md",
+    "docs/面试问题/1.RAG/RAG - 7.多模态RAG.md",
+    "docs/面试问题/1.RAG/RAG - 6.场景设计.md",
+    "docs/面试问题/1.RAG/RAG - 5.常见问题.md",
+    "docs/面试问题/1.RAG/RAG - 4.评估.md",
+    "docs/面试问题/1.RAG/RAG - 3.检索流程.md",
+    "docs/面试问题/1.RAG/RAG - 2.索引流程.md",
+    "docs/知识库/安全/LLM身份权限与多租户隔离.md",
+    "docs/面试问题/2.Agent/Agent - 工具调用.md",
+    "docs/知识库/微调/LLM微调与PEFT.md",
+    "docs/面试问题/2.Agent/Agent - MCP.md",
+    "docs/面试问题/2.Agent/Agent - 整体设计.md",
+    "docs/学习/简历 - AI应用工程师.pdf",
+    "docs/学习/英文简历 - AI 应用工程师.pdf",
+    "docs/知识库/工作流/LLM工作流编排与Human-in-the-loop.md~",
+    "interview-notes/security",
+    "interview-notes/rag"
+  ]
+}
