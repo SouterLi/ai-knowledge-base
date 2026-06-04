@@ -199,6 +199,11 @@ async def stream_tts(llm_tokens, tts_client, audio_sink):
             async for audio in tts_client.synthesize_stream(buffer):
                 await audio_sink.send(audio)
             buffer = ""
+
+    if buffer:
+        # 中文注释：流结束时补发未满一句的残留文本
+        async for audio in tts_client.synthesize_stream(buffer):
+            await audio_sink.send(audio)
 ```
 
 ### 8. 工具调用与高风险确认
