@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/面试问题/英文面试.md",
+                "file": "docs/面试问题/2.Agent/Agent - 4.问题解决.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "英文面试"
+              "title": "Agent - 4.问题解决"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 371.5
   },
   "right": {
     "id": "acc9bbc469fbcab7",
@@ -185,41 +185,41 @@
   },
   "active": "54176a77b7f02a1e",
   "lastOpenFiles": [
+    "docs/面试问题/2.Agent/Agent - 3.评估.md",
+    "docs/面试问题/2.Agent/Agent - 4.问题解决.md",
+    "docs/面试问题/2.Agent/Agent - 1.整体设计.md",
     "docs/面试问题/2.Agent/Agent - 工具调用.md",
-    "docs/面试问题/2.Agent/Agent - 整体设计.md",
+    "docs/面试问题/2.Agent/Harness 工程.md",
+    "docs/知识库/提示词工程/Prompt工程与结构化输出.md",
+    "docs/知识库/提示词工程/LLM结构化输出解析与Guardrails.md",
+    "docs/知识库/简历 - AI应用工程师.md",
+    "docs/知识库/2.agent/AI应用意图识别与任务路由.md",
+    "docs/知识库/工作流/LLM工作流编排与Human-in-the-loop.md",
+    "docs/知识库/工作流/LLM工作流编排与Human-in-the-loop-面试问答.md",
+    "docs/知识库/部署/开源LLM私有化部署与推理服务.md",
+    "docs/知识库/安全/LLM身份权限与多租户隔离.md",
+    "docs/学习/链式框架/LangGraph基础.md",
+    "docs/面试经历/2026.04.21 - 科大讯飞.md",
+    "docs/学习/链式框架/未命名",
+    "docs/知识库/生产化/LLM应用高并发容量规划与弹性伸缩.md",
+    "docs/知识库/生产化/LLM应用故障演练与降级预案.md",
+    "docs/知识库/基础能力",
     "docs/面试问题/2.Agent/Agent - 上下文管理.md",
-    "docs/面试问题/2.Agent/Agent - 多Agent.md",
     "docs/面试问题/2.Agent/Agent - 场景设计.md",
-    "docs/面试问题/2.Agent/Agent - 1.基础知识.md",
-    "docs/面试问题/英文面试.md",
-    "docs/面试经历/2026.06.04 - 汇丰银行.md",
+    "docs/面试问题/Prompt工程.md",
+    "docs/面试问题/AI辅助编码.md",
+    "docs/面试问题/2.Agent/Agent - 多Agent.md",
     "docs/面试问题/自我介绍.md",
-    "docs/面试经历/2026.5.25 - 中关村金科.md",
-    "docs/知识库/生产化/LLM发布配置与实验治理.md",
-    "docs/知识库/性能优化/LLM应用端到端延迟优化.md",
-    "docs/知识库/数据查询/Text-to-SQL与NL2SQL应用开发.md",
-    "docs/面试问题/2.Agent/Agent - MCP.md",
-    "docs/知识库/rag/RAG重排序与上下文压缩.md",
-    "README.md",
-    "docs/面试问题/框架/DeepAgent.md",
-    "docs/面试问题/框架/LangGraph.md",
-    "docs/面试问题/框架/LangChain.md",
-    "docs/知识库/agent/Agent规划执行与可靠性治理.md",
+    "docs/面试问题/英文面试.md",
+    "docs/面试问题/1.RAG/RAG - 1.整体方案.md",
+    "docs/面试问题/1.RAG/RAG - 6.场景设计.md",
+    "README.md~",
     "docs/面试问题/框架",
-    "docs/面试问题/框架.md",
     "agent_planning_reliability.docx",
     "docs/知识库/agent/Agent规划执行与可靠性治理.md~",
-    "README.md~",
-    "docs/知识库/生产化/LLM应用结果一致性与确定性治理.md",
-    "docs/知识库/rag/复杂表格文档解析与结构化抽取.md",
     "docs/知识库/文档智能",
-    "docs/知识库/语音代理/实时语音Agent架构设计.md",
     "docs/知识库/语音代理",
-    "docs/知识库/rag/RAG系统设计与评估.md",
-    "docs/知识库/rag/RAG文档摄取切分与索引构建.md",
     "docs/学习/简历 - AI应用工程师.pdf",
-    "docs/学习/英文简历 - AI 应用工程师.pdf",
-    "docs/知识库/工作流/LLM工作流编排与Human-in-the-loop.md~",
-    "interview-notes/security"
+    "docs/学习/英文简历 - AI 应用工程师.pdf"
   ]
 }
