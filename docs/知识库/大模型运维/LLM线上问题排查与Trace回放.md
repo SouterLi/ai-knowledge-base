@@ -223,6 +223,10 @@ def emit_trace_event(
 ```python
 WRITE_TOOLS = {"create_refund", "send_email", "update_permission"}
 
+def run_in_sandbox(tool_call: dict):
+    # 中文注释：示例伪函数，真实系统应调用隔离环境而不是生产工具
+    return {"status": "sandbox_executed", "tool": tool_call["name"]}
+
 def can_replay_tool(tool_name: str, replay_mode: str) -> bool:
     # 中文注释：回放环境禁止真实执行有副作用的工具
     if replay_mode == "production":
@@ -239,6 +243,8 @@ def replay_tool_call(tool_call: dict, replay_mode: str, mock_store: dict):
     cache_key = tool_call["trace_tool_call_id"]
     if replay_mode in {"mock", "readonly"}:
         return mock_store[cache_key]
+    if replay_mode == "dry_run":
+        return {"status": "skipped", "tool": tool_name, "reason": "dry_run"}
 
     return run_in_sandbox(tool_call)
 ```
