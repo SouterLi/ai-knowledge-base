@@ -65,7 +65,7 @@ RAG 一致性通常不是强事务一致性，而是工程上可解释的最终�
 
 这样做有三个好处：
 
-1. **避免构建失败时丢数据**：新版本写入成功前，旧版本可以暂时保留但不暴露。
+1. **避免构建失败时丢数据**：新版本完整发布前，旧版本继续作为线上可见版本；新版本发布后再 tombstone 旧版本。
 2. **支持回滚和审计**：短期内能知道某个切片为什么不可见。
 3. **兼容不同索引实现**：有些 ANN 索引物理删除成本高，先逻辑删除更稳。
 
@@ -167,15 +167,15 @@ def should_process(event: ChangeEvent, stored_version: int | None) -> bool:
 
 1. 新版本切片写入临时状态 `building`。
 2. 新版本全部 embedding 成功后，标记为 `active`。
-3. 同一 `doc_id` 的旧版本切片标记为 `expired`。
+3. 在文档元数据表或 manifest 中原子更新 `latest_visible_version`。
 4. 检索过滤只允许 `status = active` 且 `doc_version = latest_visible_version`。
-5. 定时任务清理 expired 切片。
+5. 同一 `doc_id` 的旧版本切片标记为 `expired`，并由定时任务清理。
 
 伪代码：
 
 ```python
-def publish_new_doc_version(vector_store, doc_id: str, new_version: int, chunks: list[dict]) -> None:
-    # 中文注释：先写新版本，再失效旧版本，避免中间失败导致文档完全不可检索
+def publish_new_doc_version(meta_store, vector_store, doc_id: str, new_version: int, chunks: list[dict]) -> None:
+    # 中文注释：先写入不可见的新版本，校验成功后再切换 latest_visible_version
     for chunk in chunks:
         vector_store.upsert(
             id=chunk["chunk_id"],
@@ -192,6 +192,7 @@ def publish_new_doc_version(vector_store, doc_id: str, new_version: int, chunks:
         filter={"doc_id": doc_id, "doc_version": new_version},
         values={"status": "active"},
     )
+    meta_store.update_latest_visible_version(doc_id=doc_id, doc_version=new_version)
     vector_store.update_metadata(
         filter={"doc_id": doc_id, "doc_version": {"$lt": new_version}},
         values={"status": "expired"},
