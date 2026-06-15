@@ -190,15 +190,17 @@ CREATE TABLE agent_tool_executions (
 ```text
 权限校验
   → 风险等级检查
+  → 只读工具走安全重试路径
   → 人工确认检查
   → 生成或校验幂等键
-  → 查询执行记录
-  → 参数 hash 校验
-  → 写入 running 记录
+  → 原子创建 running 占位记录
+  → 如果唯一键冲突，读取已有执行记录并校验参数 hash
   → 调用外部工具
   → 保存结果或 unknown
   → 返回结构化 observation
 ```
+
+这里的关键不是“先查再插”，而是依赖数据库唯一约束做 **原子 insert / upsert / 行锁**。否则两个 Worker 并发执行时可能同时查不到记录，随后都调用外部写工具。面试里要主动说明：幂等表的 `idempotency_key` 必须有唯一约束，冲突后读取已有记录并按状态返回、对账或转人工。
 
 简化代码：
 
@@ -206,6 +208,10 @@ CREATE TABLE agent_tool_executions (
 def execute_tool(tool_name: str, args: dict, context: dict) -> dict:
     policy = TOOLS[tool_name]
     check_permission(context["user"], tool_name, args)
+
+    if policy["risk"] == "read_only":
+        # 中文注释：只读工具没有真实副作用，可走受控重试，但仍要做权限、超时和限流
+        return retry_read_tool(tool_name, args, timeout_ms=policy["timeout_ms"])
 
     if policy.get("requires_human_approval"):
         approval_id = args.get("approval_id")
@@ -217,8 +223,11 @@ def execute_tool(tool_name: str, args: dict, context: dict) -> dict:
         return {"ok": False, "error": "idempotency_key_required"}
 
     args_hash = hash_args(args)
-    existing = execution_repo.find(idempotency_key)
-    if existing:
+    try:
+        # 中文注释：依赖唯一约束原子创建占位记录，避免并发 Worker 同时执行写工具
+        execution_repo.insert_running(idempotency_key, tool_name, args_hash, context)
+    except DuplicateKeyError:
+        existing = execution_repo.find_for_update(idempotency_key)
         if existing.args_hash != args_hash:
             return {"ok": False, "error": "idempotency_key_conflict"}
         if existing.status == "succeeded":
@@ -226,8 +235,7 @@ def execute_tool(tool_name: str, args: dict, context: dict) -> dict:
         if existing.status == "unknown":
             # 中文注释：响应未知时先对账，不能直接重复执行副作用工具
             return reconcile_tool_execution(existing)
-
-    execution_repo.insert_running(idempotency_key, tool_name, args_hash, context)
+        return {"ok": False, "error": "execution_in_progress"}
 
     try:
         result = call_external_tool(tool_name, args, timeout_ms=policy["timeout_ms"])
