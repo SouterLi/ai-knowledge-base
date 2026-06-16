@@ -142,6 +142,8 @@ class CacheCandidate:
     scenario: str
     acl_scope_hash: str
     index_version: str
+    prompt_version: str
+    model_version: str
     output_schema: str
     risk_level: str
     similarity: float
@@ -156,6 +158,8 @@ def can_use_semantic_cache(candidate: CacheCandidate, request: dict) -> bool:
         "scenario",
         "acl_scope_hash",
         "index_version",
+        "prompt_version",
+        "model_version",
         "output_schema",
         "risk_level",
     ]
