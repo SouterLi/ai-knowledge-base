@@ -205,8 +205,11 @@ def stream_with_moderation(token_stream, moderator, window_size=80):
 
     if buffer:
         risk = moderator.check(buffer)
-        if risk["action"] != "block":
-            yield buffer
+        if risk["action"] == "block":
+            # 中文注释：末尾残留窗口也要给出安全替代，避免用户看到无响应
+            yield "抱歉，这部分内容我不能提供。我可以帮你改为安全、合规的方向。"
+            return
+        yield buffer
 ```
 
 面试表达：**流式审核要在首 token 延迟和安全风险之间取舍。高风险业务宁可牺牲一点流畅度，也不能把违规片段先发给用户。**
